@@ -15,12 +15,19 @@ const btnEl = document.querySelector('button[type = "submit"]');
 // disabledBtn();
 
 function saveForm() {
-    btnEl.disabled = false;
+    if (emailEl.value === '' || messageEl.value === '') {
+        btnEl.disabled = true;
+    } else {
+          btnEl.disabled = false;
+    }
+
     const data = {
         email: emailEl.value,
         message: messageEl.value,
     };
     localStorage.setItem('feedback-form-state', JSON.stringify(data));
+
+
 };
 
 formEl.addEventListener('input',throttle(saveForm, 500));
@@ -39,12 +46,13 @@ autoFillForm();
 
 
 const clearData = (e) => {
+    e.preventDefault();
+    btnEl.disabled = true;
     if (emailEl.value === "" || messageEl.value === "") {
-        e.preventDefault();
         alert('Please fill all blank spaces!');
 
     } else {
-        e.preventDefault();
+      
         // localStorage.clear();
         formEl.reset();
     }
