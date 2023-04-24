@@ -52,10 +52,15 @@ const clearData = (e) => {
         alert('Please fill all blank spaces!');
 
     } else {
-      
-        // localStorage.clear();
+        const data = {
+            email: emailEl.value,
+            message: messageEl.value,
+        };
+        console.log(data)
+        localStorage.clear();
         formEl.reset();
     }
 };
 
 formEl.addEventListener('submit', clearData);
+
